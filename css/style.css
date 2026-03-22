@@ -1,0 +1,658 @@
+:root {
+  /* Carbon Paddock Palette */
+  --carbon-base: #050505;
+  --carbon-surface: #111111;
+  --carbon-border: #222222;
+
+  --accent-red: #39ff14;
+  --accent-glow: rgba(57, 255, 20, 0.15);
+
+  --text-main: #f9fafb;
+  --text-muted: #9ca3af;
+
+  /* Typography */
+  --font-primary: "Inter", sans-serif;
+  --font-tech: "JetBrains Mono", monospace;
+
+  /* Easing */
+  --ease-fluid: cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-fast: all 0.3s var(--ease-fluid);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: var(--carbon-base);
+  background-image: repeating-linear-gradient(
+    45deg,
+    #050505 0px,
+    #050505 2px,
+    #080808 2px,
+    #080808 4px
+  );
+  color: var(--text-main);
+  font-family: var(--font-primary);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* --- Enable Smooth Scrolling Globally --- */
+html {
+  scroll-behavior: smooth;
+}
+
+/* --- Hamburger Menu & Top Nav --- */
+.top-nav {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 100%;
+  padding: 1.5rem 2rem;
+  display: flex;
+  justify-content: flex-end;
+  z-index: 1000;
+  pointer-events: none; /* Allows clicking background elements */
+}
+
+.menu-btn {
+  cursor: pointer;
+  z-index: 1001; /* Keeps the button above the menu */
+  pointer-events: auto;
+  background: var(--carbon-surface);
+  border: 1px solid var(--carbon-border);
+  padding: 10px;
+  border-radius: 4px;
+  transition: var(--transition-fast);
+}
+
+.menu-btn:hover {
+  border-color: var(--accent-red);
+  box-shadow: 0 0 15px var(--accent-glow);
+}
+
+.menu-btn .bar {
+  display: block;
+  width: 25px;
+  height: 2px;
+  margin: 5px auto;
+  background-color: var(--text-main);
+  transition: var(--transition-fast);
+}
+
+/* Transform into an "X" when active */
+.menu-btn.active .bar:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+  background-color: var(--accent-red);
+}
+.menu-btn.active .bar:nth-child(2) {
+  opacity: 0;
+}
+.menu-btn.active .bar:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+  background-color: var(--accent-red);
+}
+
+/* --- Side Navigation Overlay --- */
+.nav-links {
+  position: fixed;
+  top: 0;
+  right: -100%; /* Hidden off-screen by default */
+  width: 100%;
+  max-width: 350px; /* Constrain width on desktop, full width on mobile */
+  height: 100vh;
+  background: rgba(5, 5, 5, 0.95);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-left: 1px solid var(--carbon-border);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 2.5rem;
+  transition: right 0.5s var(--ease-fluid);
+  list-style: none;
+  z-index: 1000;
+  pointer-events: auto;
+}
+
+.nav-links.active {
+  right: 0; /* Slide in */
+}
+
+.nav-links a {
+  color: var(--text-main);
+  font-family: var(--font-tech);
+  font-size: 1.2rem;
+  text-decoration: none;
+  transition: var(--transition-fast);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.nav-links a:hover {
+  color: var(--accent-red);
+  transform: scale(1.05);
+}
+
+/* --- Footer Social Icons --- */
+.social-links {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+}
+
+.social-links a {
+  color: var(--text-muted);
+  transition: var(--transition-fast);
+  display: inline-flex;
+}
+
+.social-links a:hover {
+  color: var(--accent-red);
+  transform: translateY(-3px);
+}
+
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+.tech-font {
+  font-family: var(--font-tech);
+  font-size: 0.85rem;
+  letter-spacing: 0.05em;
+}
+.text-muted {
+  color: var(--text-muted);
+}
+.text-highlight {
+  color: var(--accent-red);
+  font-weight: 600;
+}
+.accent-icon {
+  color: var(--accent-red);
+}
+
+/* Hero Section */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  padding-top: 5rem;
+}
+.tech-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-tech);
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  border: 1px solid var(--carbon-border);
+  padding: 4px 12px;
+  border-radius: 4px;
+  margin-bottom: 2rem;
+}
+.status-indicator {
+  width: 8px;
+  height: 8px;
+  background-color: var(--accent-red);
+  border-radius: 50%;
+  box-shadow: 0 0 8px var(--accent-red);
+}
+.hero h1 {
+  font-size: clamp(3rem, 8vw, 5rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1;
+  margin-bottom: 1rem;
+}
+.hero h2 {
+  font-size: clamp(1.5rem, 4vw, 2.5rem);
+  color: var(--text-muted);
+  font-weight: 400;
+  margin-bottom: 1.5rem;
+}
+.hero-subtext {
+  font-size: 1.125rem;
+  max-width: 600px;
+  color: var(--text-muted);
+  margin-bottom: 3rem;
+}
+
+/* Buttons */
+.cta-group {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+a {
+  text-decoration: none;
+}
+.btn-primary,
+.btn-secondary {
+  padding: 12px 24px;
+  font-family: var(--font-tech);
+  font-size: 0.9rem;
+  font-weight: 700;
+  transition: var(--transition-fast);
+  cursor: pointer;
+  border-radius: 2px;
+}
+.btn-primary {
+  background: var(--accent-red);
+  color: black;
+  border: 1px solid var(--accent-red);
+}
+.btn-primary:hover {
+  background: transparent;
+  color: var(--accent-red);
+  box-shadow: 0 0 15px var(--accent-glow);
+}
+.btn-secondary {
+  background: transparent;
+  color: var(--text-main);
+  border: 1px solid var(--carbon-border);
+}
+.btn-secondary:hover {
+  border-color: var(--text-main);
+}
+
+/* Sections & Layout */
+.section-container {
+  padding: 6rem 0;
+  border-top: 1px solid var(--carbon-border);
+}
+.section-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 3rem;
+}
+.section-header h3 {
+  font-size: 2rem;
+  font-weight: 600;
+}
+
+.grid-layout {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
+  gap: 2rem;
+}
+
+/* Cards */
+.card {
+  background: var(--carbon-surface);
+  border: 1px solid var(--carbon-border);
+  padding: 2rem;
+  border-radius: 4px;
+  transition: var(--transition-fast);
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.card:hover {
+  transform: translateY(-5px);
+  border-color: var(--accent-red);
+  box-shadow: 0 10px 30px var(--accent-glow);
+}
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: var(--text-muted);
+  border-bottom: 1px solid var(--carbon-border);
+  padding-bottom: 1rem;
+}
+.card h4 {
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+.card p {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  flex-grow: 1;
+}
+.card-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--text-main);
+  font-family: var(--font-tech);
+  font-size: 0.85rem;
+  margin-top: 1rem;
+  transition: var(--transition-fast);
+}
+.card-link:hover {
+  color: var(--accent-red);
+}
+
+/* --- Publication Cards --- */
+.card-link-publication {
+  text-decoration: none;
+  color: inherit;
+  display: block; /* Ensures the anchor tag fills the grid cell */
+}
+
+/* Make all cards in the grid equal height */
+.card-link-publication .card {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Push the footer to the bottom of the card */
+.card-link-publication .card h4 {
+  margin-bottom: 0.5rem;
+}
+
+.card-link-publication .card > .text-muted {
+  flex-grow: 1; /* Pushes the footer down */
+}
+
+/* Hover effects apply to the card when the link is hovered */
+.card-link-publication:hover .card {
+  transform: translateY(-5px);
+  border-color: var(--accent-red);
+  box-shadow: 0 10px 30px var(--accent-glow);
+}
+
+/* Footer layout for DOI and icon */
+.card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 1.5rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--carbon-border);
+}
+
+.link-arrow {
+  font-size: 1.2rem;
+  color: var(--text-muted);
+  transition: var(--transition-fast);
+  flex-shrink: 0;
+}
+
+.card-footer p.tech-font {
+  word-break: break-all;
+  padding-right: 1rem;
+  margin: 0;
+}
+
+/* Light up the icon when the card is hovered */
+.card-link-publication:hover .link-arrow {
+  color: var(--accent-red);
+}
+
+/* Timeline (Operations) */
+.timeline {
+  border-left: 2px solid var(--carbon-border);
+  padding-left: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+}
+.timeline-item {
+  position: relative;
+}
+.timeline-item::before {
+  content: "";
+  position: absolute;
+  left: -35px;
+  top: 0;
+  width: 12px;
+  height: 12px;
+  background: var(--carbon-base);
+  border: 2px solid var(--accent-red);
+  border-radius: 50%;
+}
+.timeline-item h4 {
+  font-size: 1.25rem;
+  margin: 0.5rem 0;
+}
+
+/* Footer */
+.footer {
+  padding: 3rem 0;
+  text-align: center;
+  border-top: 1px solid var(--carbon-border);
+  color: var(--text-muted);
+}
+
+/* Animations */
+.reveal-on-scroll {
+  opacity: 0;
+  transform: translateY(30px);
+  transition:
+    opacity 0.8s var(--ease-fluid),
+    transform 0.8s var(--ease-fluid);
+}
+.reveal-on-scroll.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+/* --- Interactive Cursor Glow --- */
+.cursor-glow {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 600px;
+  height: 600px;
+  /* Radial gradient creating a soft red glow fading into transparency */
+  background: radial-gradient(
+    circle closest-side,
+    rgba(230, 0, 0, 0.08),
+    transparent
+  );
+  transform: translate(-50%, -50%);
+  pointer-events: none; /* Ensures the glow doesn't block clicks */
+  z-index: 0;
+}
+
+/* Elevate existing content above the background glow */
+header,
+main,
+footer {
+  position: relative;
+  z-index: 1;
+}
+
+/* --- Photography Grid (Masonry / Pinterest Style) --- */
+.photo-grid {
+  /* Establish columns that adjust based on screen width */
+  column-count: 1;
+  column-gap: 1.5rem;
+}
+
+/* Add columns as the screen gets wider */
+@media (min-width: 600px) {
+  .photo-grid {
+    column-count: 2;
+  }
+}
+@media (min-width: 900px) {
+  .photo-grid {
+    column-count: 3;
+  }
+}
+
+.photo-frame {
+  width: 100%;
+  /* CRITICAL: Prevents a photo from being split in half between two columns */
+  break-inside: avoid;
+  margin-bottom: 1.5rem; /* Vertical spacing between interlocking photos */
+  background-color: var(--carbon-surface);
+  border: 1px solid var(--carbon-border);
+  border-radius: 4px;
+  overflow: hidden;
+  transition: var(--transition-fast);
+  display: inline-block; /* Helps older browsers respect the break-inside rule */
+}
+
+.photo-frame:hover {
+  border-color: var(--accent-red);
+  box-shadow: 0 10px 30px var(--accent-glow);
+  transform: scale(1.02);
+}
+
+.photo-frame img {
+  width: 100%;
+  /* Let the image dictate its natural height instead of forcing a crop */
+  height: auto;
+  display: block; /* Removes the tiny white gap that browsers add under images */
+  opacity: 0.8;
+  transition: var(--transition-fast);
+}
+
+.photo-frame:hover img {
+  opacity: 1;
+}
+
+/* --- Language Switcher --- */
+.language-switcher {
+  position: fixed;
+  bottom: 2rem;
+  left: 2rem;
+  z-index: 999; /* Boosted from 100 to 999 to clear the footer */
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--carbon-surface);
+  border: 1px solid var(--carbon-border);
+  padding: 8px 12px;
+  border-radius: 4px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.8); /* Darker shadow for better separation */
+  transition: var(--transition-fast);
+}
+
+.language-switcher:hover {
+  border-color: var(--accent-red);
+}
+
+.language-switcher span {
+  color: var(--text-muted);
+  font-size: 1.2rem;
+}
+
+#lang-select {
+  background: transparent;
+  color: var(--text-main);
+  border: none;
+  font-family: var(--font-tech);
+  font-size: 0.85rem;
+  cursor: pointer;
+  outline: none;
+  position: relative;
+  z-index: 1000;
+}
+
+#lang-select option {
+  background: var(--carbon-base);
+  color: var(--text-main);
+  font-weight: 600;
+}
+
+.cursor-glow {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 200px;
+  height: 200px;
+  background: radial-gradient(
+    circle closest-side,
+    rgb(255, 255, 255, 0.1),
+    transparent
+  );
+  transform: translate(-50%, -50%);
+  pointer-events: none; /* CRITICAL: Allows clicks to pass through */
+  z-index: 0;
+}
+
+/* --- Photography Lightbox --- */
+/* Add a pointer cursor to the grid images so users know they are clickable */
+.photo-frame {
+  cursor: pointer;
+}
+
+.lightbox {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(5, 5, 5, 0.95);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000; /* Extremely high to sit above nav menus and cursor glow */
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s var(--ease-fluid);
+}
+
+/* The active state when an image is clicked */
+.lightbox.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.lightbox img {
+  max-width: 90vw;
+  max-height: 90vh;
+  border-radius: 4px;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.8);
+  /* Start slightly shrunken for a pop-in effect */
+  transform: scale(0.95);
+  transition: transform 0.4s var(--ease-fluid);
+}
+
+.lightbox.active img {
+  /* Expand to full size when active */
+  transform: scale(1);
+}
+
+.lightbox-close {
+  position: absolute;
+  top: 2rem;
+  right: 2rem;
+  color: var(--text-main);
+  font-size: 2.5rem;
+  cursor: pointer;
+  transition: var(--transition-fast);
+}
+
+.lightbox-close:hover {
+  color: var(--accent-red);
+  transform: rotate(90deg); /* Smooth spin effect on hover */
+}
+
+
+/* --- Mobile View Overrides --- */
+@media (max-width: 500px) {
+  /* Dock the language switcher to the bottom left */
+  .language-switcher {
+    bottom: 0;
+    left: 0;
+    /* Square off the bottom and left sides, keep the top-right rounded */
+    border-radius: 0 4px 0 0;
+    border-left: none;
+    border-bottom: none;
+    /* Slightly tighter padding to save space */
+    padding: 6px 10px;
+  }
+
+  /* Shrink the text slightly for mobile screens */
+  #lang-select {
+    font-size: 0.8rem;
+  }
+
+  .language-switcher span {
+    font-size: 1.1rem;
+  }
+}
