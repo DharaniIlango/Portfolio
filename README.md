@@ -1,44 +1,64 @@
-# Dharani Ilango - Portfolio
+# 🚀 Personal Portfolio
 
-Minimal, "Paddock" themed portfolio highlighting Enterprise Architecture, Data Analytics, and Incident Management.
-Built with vanilla HTML, CSS, and JS.
+Welcome to my digital space — where code meets creativity.
 
-## Local Development
+## 👨‍💻 About Me
 
-1. Open Visual Studio Code.
-2. Install the **Live Server** extension.
-3. Open `index.html`, right-click, and select "Open with Live Server" to view changes in real-time.
+I’m a passionate developer focused on building scalable, efficient, and user-friendly applications.  
+With a strong interest in **DevOps, full-stack development, and AI-powered tools**, I enjoy turning ideas into real-world solutions.
 
-## Deployment to Firebase Hosting (Google Ecosystem)
+- 💡 Problem solver with a logical mindset
+- ⚙️ Interested in automation & system design
+- 🚀 Working towards a DevOps-focused career
 
-1. **Install Firebase CLI:**
-   Open your terminal and run:
+## 🌐 Live Portfolio
 
-   ```bash
-   npm install -g firebase-tools
-   ```
+🔗
 
-2. **Login to Google/Firebase:**
+## 🛠️ Tech Stack
 
-   ```bash
-   firebase login
-   ```
+### Languages
 
-3. **Initialize the Project:**
-   Navigate to your portfolio directory in the terminal and run:
+- JavaScript / TypeScript
+- Python
+- Java
 
-   ```Bash
-   firebase init hosting
-   ```
+### Frontend
 
-   - Select "Create a new project" (or select an existing one from your Firebase Console).
-   - What do you want to use as your public directory? (Type .)
-   - Configure as a single-page app? (No)
-   - Set up automatic builds and deploys with GitHub? (No)
-   - Overwrite index.html? (No)
+- Angular
+- HTML5
+- CSS3
+- Bootstrap
 
-4. **Deploy to the World:**
-   ```Bash
-   firebase deploy
-   ```
-   Firebase will provide a live URL (e.g., https://your-project-id.web.app) where your world-class portfolio is now live.
+### Backend
+
+- Springboot
+- Microservices architecture
+- RESTful APIs
+
+### DevOps & Tools
+
+- Docker
+- Git & GitHub
+- CI/CD Pipelines
+- Linux
+
+## 📂 Features
+
+- ✨ Clean and responsive UI
+- ⚡ Fast performance
+- 📱 Mobile-friendly design
+- 📌 Project showcase with live demos
+- 📄 Downloadable resume
+
+---
+
+## 📬 Contact
+
+- 📧 Email: dharaniilango@thehartford.com
+- 💼 LinkedIn: https://www.linkedin.com/in/dharaniilango1209
+- 🐙 GitHub: https://github.com/dharaniilango
+
+## 🧠 Philosophy
+
+> “Code is not just logic — it’s a reflection of how you think.”
