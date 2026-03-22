@@ -34,73 +34,98 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // ==========================================
-  // 3. GEMINI API TRANSLATION DROPDOWN
+  // 5. GEMINI API TRANSLATION ENGINE (WITH PERSISTENCE)
   // ==========================================
-  const langSelect = document.getElementById("lang-select");
-  const CLOUDFLARE_WORKER_URL =
-    "https://gemini-translator-api.idharanii.workers.dev/";
+  try {
+    const langSelect = document.getElementById("lang-select");
+    const CLOUDFLARE_WORKER_URL =
+      "https://gemini-translator-api.idharanii.workers.dev/";
 
-  if (langSelect) {
-    // 1. Identify all elements we want to translate
-    const elementsToTranslate = document.querySelectorAll(
-      "h1, h2, h3, h4, p, .btn-primary, .btn-secondary",
-    );
+    if (langSelect) {
+      const elementsToTranslate = document.querySelectorAll(
+        "h1, h2, h3, h4, p, .btn-primary, .btn-secondary",
+      );
+      const originalEnglishText = Array.from(elementsToTranslate).map(
+        (el) => el.innerText,
+      );
 
-    // 2. CACHE THE ORIGINAL ENGLISH: Save a backup instantly on page load
-    const originalEnglishText = Array.from(elementsToTranslate).map(
-      (el) => el.innerText,
-    );
+      // CORE FUNCTION: We wrap the logic here so we can call it anytime
+      const translatePage = async (targetLang) => {
+        // 1. Save the user's choice to the browser's permanent memory
+        localStorage.setItem("preferred_portfolio_lang", targetLang);
 
-    langSelect.addEventListener("change", async (e) => {
-      const targetLang = e.target.value;
+        // 2. Instant English Revert
+        if (targetLang === "en") {
+          elementsToTranslate.forEach(
+            (el, index) => (el.innerText = originalEnglishText[index]),
+          );
+          return;
+        }
 
-      // 3. INSTANT ENGLISH REVERT: If English is selected, restore from the cache and stop.
-      if (targetLang === "en") {
-        elementsToTranslate.forEach((el, index) => {
-          el.innerText = originalEnglishText[index];
-        });
-        return;
+        // 3. Local Storage Speed Cache
+        const cachedTranslation = localStorage.getItem(
+          `lang_cache_${targetLang}`,
+        );
+        if (cachedTranslation) {
+          const translatedArray = JSON.parse(cachedTranslation);
+          elementsToTranslate.forEach((el, index) => {
+            if (translatedArray[index]) el.innerText = translatedArray[index];
+          });
+          return;
+        }
+
+        // 4. Fallback API Call
+        document.body.style.opacity = "0.5";
+        document.body.style.cursor = "wait";
+
+        try {
+          const response = await fetch(CLOUDFLARE_WORKER_URL, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              targetLanguage: targetLang,
+              textToTranslate: JSON.stringify(originalEnglishText),
+            }),
+          });
+
+          if (!response.ok) throw new Error("Backend connection failed");
+          const data = await response.json();
+          if (data.error) throw new Error(data.error);
+
+          const translatedData = JSON.parse(data.translation);
+          const translatedArray = translatedData.translations;
+
+          localStorage.setItem(
+            `lang_cache_${targetLang}`,
+            JSON.stringify(translatedArray),
+          );
+
+          elementsToTranslate.forEach((el, index) => {
+            if (translatedArray && translatedArray[index])
+              el.innerText = translatedArray[index];
+          });
+        } catch (error) {
+          console.error("Translation error:", error);
+        } finally {
+          document.body.style.opacity = "1";
+          document.body.style.cursor = "default";
+        }
+      };
+
+      // TRIGGER 1: When the user manually changes the dropdown
+      langSelect.addEventListener("change", (e) => {
+        translatePage(e.target.value);
+      });
+
+      // TRIGGER 2: ON PAGE LOAD - Check if they have a saved preference
+      const savedLanguage = localStorage.getItem("preferred_portfolio_lang");
+      if (savedLanguage && savedLanguage !== "en") {
+        langSelect.value = savedLanguage; // Update the UI dropdown to match
+        translatePage(savedLanguage); // Fire the translation instantly
       }
-
-      document.body.style.opacity = "0.5";
-      document.body.style.cursor = "wait";
-
-      try {
-        // 4. ALWAYS TRANSLATE FROM ENGLISH: We pass 'originalEnglishText' to the API
-        // so we never accidentally translate Spanish directly to Tamil.
-        const response = await fetch(CLOUDFLARE_WORKER_URL, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            targetLanguage: targetLang,
-            textToTranslate: JSON.stringify(originalEnglishText),
-          }),
-        });
-
-        if (!response.ok) throw new Error("Backend connection failed");
-
-        const data = await response.json();
-
-        if (data.error) throw new Error(data.error);
-
-        // 5. Parse the new JSON object format
-        const translatedData = JSON.parse(data.translation);
-        const translatedArray = translatedData.translations;
-
-        // 6. Update the DOM
-        elementsToTranslate.forEach((el, index) => {
-          if (translatedArray && translatedArray[index]) {
-            el.innerText = translatedArray[index];
-          }
-        });
-      } catch (error) {
-        console.error("Translation error:", error);
-        alert("Translation failed: " + error.message);
-      } finally {
-        document.body.style.opacity = "1";
-        document.body.style.cursor = "default";
-      }
-    });
+    }
+  } catch (error) {
+    console.error("Translation engine failed to initialize:", error);
   }
 
   // ==========================================
