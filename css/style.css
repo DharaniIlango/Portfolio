@@ -263,7 +263,7 @@ a {
 
 /* Sections & Layout */
 .section-container {
-  padding: 6rem 0;
+  padding: 5rem 0;
   border-top: 1px solid var(--carbon-border);
 }
 .section-header {
@@ -606,7 +606,7 @@ footer {
   max-width: 90vw;
   max-height: 90vh;
   border-radius: 4px;
-  box-shadow: 0 10px 40px rgba(0,0,0,0.8);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.8);
   /* Start slightly shrunken for a pop-in effect */
   transform: scale(0.95);
   transition: transform 0.4s var(--ease-fluid);
@@ -631,7 +631,6 @@ footer {
   color: var(--accent-red);
   transform: rotate(90deg); /* Smooth spin effect on hover */
 }
-
 
 /* --- Mobile View Overrides --- */
 @media (max-width: 500px) {

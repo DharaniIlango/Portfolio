@@ -40,7 +40,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Replace this with the actual URL Cloudflare gave you
   const CLOUDFLARE_WORKER_URL =
-    "https://portfolio-translator.YOUR-USERNAME.workers.dev";
+    "http://gemini-translator-api.idharanii.workers.dev/";
 
   if (langSelect) {
     langSelect.addEventListener("change", async (e) => {
