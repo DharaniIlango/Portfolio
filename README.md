@@ -13,7 +13,7 @@ With a strong interest in **DevOps, full-stack development, and AI-powered tools
 
 ## 🌐 Live Portfolio
 
-🔗
+🔗 https://portfolio.idharanii.workers.dev/
 
 ## 🛠️ Tech Stack
 
