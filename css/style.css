@@ -655,3 +655,30 @@ footer {
     font-size: 1.1rem;
   }
 }
+/* ==========================================
+   MOBILE PHOTOGRAPHY GRID FIX
+   ========================================== */
+@media (max-width: 768px) {
+  /* Target the containers holding the images */
+  .photo-frame {
+    width: 100% !important;
+    height: 300px !important; /* Forces the box to exist visually */
+    display: block !important;
+    margin-bottom: 1.5rem !important;
+    
+    /* Kill the scroll animation on mobile to prevent invisibility bugs */
+    opacity: 1 !important; 
+    transform: none !important;
+    visibility: visible !important;
+  }
+
+  /* Target the actual images inside the containers */
+  .photo-frame img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important; /* Ensures the image fills the 300px box perfectly without stretching */
+    display: block !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+  }
+}
