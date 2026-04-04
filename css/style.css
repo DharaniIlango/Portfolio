@@ -665,9 +665,9 @@ footer {
     height: 300px !important; /* Forces the box to exist visually */
     display: block !important;
     margin-bottom: 1.5rem !important;
-    
+
     /* Kill the scroll animation on mobile to prevent invisibility bugs */
-    opacity: 1 !important; 
+    opacity: 1 !important;
     transform: none !important;
     visibility: visible !important;
   }
@@ -679,6 +679,14 @@ footer {
     object-fit: cover !important; /* Ensures the image fills the 300px box perfectly without stretching */
     display: block !important;
     opacity: 1 !important;
+    visibility: visible !important;
+  }
+}
+@media (max-width: 768px) {
+  /* Force the entire photography section to bypass the stuck scroll animation */
+  #photography.reveal-on-scroll {
+    opacity: 1 !important;
+    transform: none !important;
     visibility: visible !important;
   }
 }
