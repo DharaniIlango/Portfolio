@@ -15,7 +15,7 @@ With a strong interest in **DevOps, full-stack development, and AI-powered tools
 
 🔗 https://portfolio.idharanii.workers.dev/
 
-## 🛠️ Tech Stack
+## 🛠️ My Tech Stack
 
 ### Languages
 
@@ -43,7 +43,7 @@ With a strong interest in **DevOps, full-stack development, and AI-powered tools
 - CI/CD Pipelines
 - Linux
 
-## 📂 Features
+## 📂 Features this site hold
 
 - ✨ Clean and responsive UI
 - ⚡ Fast performance
@@ -55,7 +55,7 @@ With a strong interest in **DevOps, full-stack development, and AI-powered tools
 
 ## 📬 Contact
 
-- 📧 Email: dharaniilango@thehartford.com
+- 📧 Email: dharaniilango1209@gmail.com
 - 💼 LinkedIn: https://www.linkedin.com/in/dharaniilango1209
 - 🐙 GitHub: https://github.com/dharaniilango
 
